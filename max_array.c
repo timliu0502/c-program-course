@@ -20,6 +20,24 @@ int find_max(int n, int arr[])
     return curr_max;
 
 }
+
+
+/* 找到最小值
+ */
+int find_min(int n, int arr[])
+{
+    int curr_min = arr[0];
+    for (int i = 1; i < n; ++i)
+    {
+        if (arr[i] < curr_min)
+        {
+            curr_min = arr[i];
+        }
+    }
+    return curr_min;
+}
+
+
     
 int main(int argc, char *argv[])
 {
@@ -31,33 +49,28 @@ int main(int argc, char *argv[])
        return 1;
     }
 
-    if (argc > 21)
-    {
-        printf("Dont imput more than 20 integers!\n");
+    int n = argc - 1; // the number of integers
 
-	return 1;
-    }
-    /*Problem: argv[] is anarray of 'char', but we need 
-     * arr[] is an array of 'int'. We need to do conversion.
-     */
-    int arr[] = 
-    {
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0
-    };
+    /* Use malloc() allocate memory space for the array of integers */
+    int *arr = (int *) malloc(4 * n);
 
-    for (int i = 1; i < argc; ++i)
+
+    for (int i = 0; i < n; ++i)
     {
 	    // convert an array of'char' into an array of 'int'
-	    arr[i - 1] = atoi(argv[i]);
+	    arr[i] = atoi(argv[i + 1]);
     }
-
-    // 'n' is the total number of integers
-    int n = argc - 1;
 	
-    int s = find_max(n, arr);
+    int s = find_max(n , arr);
+    int a = find_min(n , arr);
+    printf("The max value is:%d\n" , s );
+    printf("The min value is:%d\n" , a );
+    
+    /*释放内存
+     */
+    free(arr);
+    arr = NULL;
 
-    printf("The max value is: %d\n" , s);
 
     return 0;
 }
