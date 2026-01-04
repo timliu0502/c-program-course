@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<stdbool.h>
 
-int fibonacci(int n, int *arr)
+int fibonacci(int m, int n, int *arr)
 {
     if (n == 0) 
     {
@@ -12,9 +12,13 @@ int fibonacci(int n, int *arr)
     arr[0] = 0;
     arr[1] = 1;
 
-    for (int i = 2; i <= n; ++i)
+    int start = m + 1;
+    if (start < 2) { start = 2;}
+
+    for (int i = start; i <= n; ++i)
     {
         arr[i] = arr[i-1] + arr[i-2];
+	printf("Compute: f(%d) = %d \n", i, arr[i]);
     }
 
     return arr[n];
@@ -26,16 +30,16 @@ int main(int argc, char *argv[])
     int memory_size = (max_num+1) *4;
     int *arr = (int *) malloc(memory_size);
 
+    int max_computed = 0;
+
     while(true)
     {   
-        printf("WHich Fibonacci number do you want to know?\n");
+        printf("Which Fibonacci number do you want to know?\n");
         printf("Please input ->:");
 
         int n;
     
         scanf("%d" , &n);
-
-        printf ("Your input is %d\n" , n);
 
         if (n < 0)
         {
@@ -43,7 +47,24 @@ int main(int argc, char *argv[])
 	    return 1;
         }
 
-        int f = fibonacci(n, arr);
+        if (n> max_num)
+	{
+	    printf("Please input an integer < =%d.\n" , max_num);
+	    return 1;
+	}
+
+        int f = 0;
+
+	if (n > max_computed)
+	{
+	    f = fibonacci(max_computed, n, arr);
+	    max_computed = n;
+	}
+
+	else
+	{
+	    f = arr[n];
+	}
 
         printf ("The %d-th Fibonacci number is: %d\n" , n, f);
 
@@ -51,18 +72,18 @@ int main(int argc, char *argv[])
 
         char c;
 
-	scanf(" %c",&c);
+	scanf("  %c",&c);
 
         if (c == 'Y')
         {
             printf("Good! Let's continue!\n");
         }
-            else if(c =='N')
+        else if(c =='N')
         {
             printf("Good bye!\n");
 	    break;
         }
-	    else
+	else
 	{
 	    printf("Incorrect input, bye\n");
 	    break;
