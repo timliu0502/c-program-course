@@ -2,12 +2,35 @@
 #include<stdlib.h>
 #include<string.h>
 
+int array_insert(int*b,int len, int y)
+{
+    int j = 0;
+    for(int i = 0; i < len; ++i)
+    {
+        if(b[i]>y)
+	{
+	    j = i;
+	    break;
+	}
+    }
+    printf("j = %d\n", j);
+
+    for(int i = len-2; i>=j; --i)
+    {
+        b[i+1] = b[i];
+    }
+    b[j] = y;
+
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
-    /*input 1: comma seperated sorted num like 1,3,5,7,9
-     *input 2: the num to be inserted
-     *output: a sorted array
-     */
+    if (argc < 3)
+    {
+        printf("Please input a comma-seperated array");
+	return 1;
+    }	
     int len1 = strlen(argv[1]);
     int comma_count = 0;
     for (int i = 0 ; i < len1; ++i)
@@ -18,8 +41,9 @@ int main(int argc, char *argv[])
         }
     }
     int num_count = comma_count + 1;
-    int *a = (int *) malloc(num_count * sizeof(int));
-    
+    int *a = (int *) malloc((num_count + 1) * sizeof(int));
+
+
     a[0] = atoi(&argv[1][0]);
     
     
@@ -33,11 +57,16 @@ int main(int argc, char *argv[])
 	    j += 1;
 	}
     }
-    for (int i = 0; i < num_count; i++)
-    {
-        printf("%d\n", a[i]);
-    }
 
+
+    int x = atoi(argv[2]);
+    array_insert(a, num_count + 1, x);
+
+    for (int i = 0; i < num_count + 1; i++)
+    {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
 
     /*
      * Free memory
