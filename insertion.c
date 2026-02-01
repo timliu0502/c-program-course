@@ -24,6 +24,16 @@ int array_insert(int*b,int len, int y)
     return 0;
 }
 
+int print_array(int *a, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
 int main(int argc, char *argv[])
 {
     if (argc < 3)
@@ -57,16 +67,16 @@ int main(int argc, char *argv[])
 	    j += 1;
 	}
     }
-
+    printf("Before insertion:\n");
+    print_array(a, num_count + 1);
 
     int x = atoi(argv[2]);
-    array_insert(a, num_count + 1, x);
+    array_insert(a, num_count +1, x);
 
-    for (int i = 0; i < num_count + 1; i++)
-    {
-        printf("%d ", a[i]);
-    }
-    printf("\n");
+    printf("After insertion:\n");
+    print_array(a, num_count + 1);
+
+
 
     /*
      * Free memory
