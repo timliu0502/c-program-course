@@ -2,14 +2,21 @@
 #include<stdlib.h>
 #include<string.h>
 
-int print_array(int *a, int len)
+int main_value_location(int * a, int len)
 {
-    for (int i = 0; i < len; i++)
+    int idx = 0;
+    int m = a[0];
+    for (int i = 1; i<len; ++i)
     {
-        printf("%d ", a[i]);
+        if (a[i] < m)
+	{
+            m = a[i];
+	    idx = i;
+	}    
     }
-    printf("\n");
 
+    printf("%d\n",m);
+    printf("%d\n", idx);
     return 0;
 }
 
@@ -30,7 +37,9 @@ int main(int argc, char *argv[])
             comma_count++;
         }
     }
-    int num_count = comma_count + 1;
+
+    int num_count = comma_count;
+	    
     int *a = (int *) malloc(num_count * sizeof(int));
 
 
@@ -48,7 +57,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    print_array(a, num_count);
-
+    //print_array(a, num_count);
+    main_value_location(a, num_count);
     return 0;
 }
