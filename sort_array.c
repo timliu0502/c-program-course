@@ -2,7 +2,19 @@
 #include<stdlib.h>
 #include<string.h>
 
-int main_value_location(int * a, int len)
+
+int print_array(int *a, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+int min_value_location(int * a, int len)
 {
     int idx = 0;
     int m = a[0];
@@ -15,8 +27,14 @@ int main_value_location(int * a, int len)
 	}    
     }
 
-    printf("%d\n",m);
-    printf("%d\n", idx);
+    //printf("The min value is: %d\n ,the index of the min is: %d\n",m,idx);
+    for (int i = 0; i < len; ++i);                                                   
+
+
+    a[idx] = a[0];
+    a[0] = m;
+
+
     return 0;
 }
 
@@ -36,8 +54,8 @@ int main(int argc, char *argv[])
         {
             comma_count++;
         }
+   
     }
-
     int num_count = comma_count;
 	    
     int *a = (int *) malloc(num_count * sizeof(int));
@@ -57,7 +75,16 @@ int main(int argc, char *argv[])
         }
     }
 
+
+
     //print_array(a, num_count);
-    main_value_location(a, num_count);
+    print_array(a, num_count);
+
+    for(int i = 0; i<num_count - 1; ++i)
+    {
+        min_value_location(a + i, num_count - i);
+    }
+
+    print_array(a, num_count);
     return 0;
 }
