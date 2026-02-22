@@ -38,6 +38,17 @@ int min_value_location(int * a, int len)
     return 0;
 }
 
+int sort_array(int *a, int len)
+{
+    for(int i = 0; i<num_count - 1; ++i)
+    {
+        min_value_location(a + i, num_count - i);
+    }
+}
+
+
+
+
 
 int main(int argc, char *argv[])
 {
@@ -79,12 +90,7 @@ int main(int argc, char *argv[])
 
     //print_array(a, num_count);
     print_array(a, num_count);
-
-    for(int i = 0; i<num_count - 1; ++i)
-    {
-        min_value_location(a + i, num_count - i);
-    }
-
+    sort_array(a, num_count);
     print_array(a, num_count);
     return 0;
 }
