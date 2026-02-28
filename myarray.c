@@ -1,5 +1,5 @@
 #include "myarray.h"
-#include "stdio.h"
+#include<stdio.h>
 
 int sort_array(int *a, int len)
 {
@@ -26,5 +26,23 @@ int find_min_and_swap(int *a, int len)
 {
     int j = 0;
     int m = a[0];
-}
 
+    for(int i=1; i<len; ++i)
+    {
+        if(a[i]<m) 
+        {
+            m = a[i];
+            j = i;
+        }
+    }
+
+    //printf("min value:%d\n", m);
+    //printf("location:%d\n", j); 
+
+    //swap the value of a[j] with a[0]
+    // m = a[j];
+    a[j] = a[0];
+    a[0] = m;
+
+    return 0;
+}
