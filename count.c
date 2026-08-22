@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
         printf("%s\n", buf);
     }
 
-    int c = c + 1;
+    int c = 0;
     char delims[] = " ,";
     char *token = strtok(buf, delims);
     while (token != NULL) {
