@@ -2,41 +2,46 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        printf("Please load a file.\n");
-        return 1;
-    }
+int tok_sum(char* buf);
 
-    FILE *fp = fopen(argv[1], "r");
-    if (fp == NULL) {
-        printf("open file %s failed!\n", argv[1]);
-        return 2;
-    }
+int main(int argc, char *argv[])
+{
+	if(argc != 2)
+	{
+		printf("init error!\n");
+		return 1;
+	}
+	FILE *fp = fopen(argv[1],"r");
+	if (fp == NULL)
+	{
+		printf("open file %s failed!\n", argv[1]);
+		return 2;
+	}
+	char buf[1000];
 
-    char buf[1000];
-    int count = 0;
-    int sum = 0;
+	if(fgets(buf,sizeof(buf),fp)!=NULL)
+	{
+		printf("%s",buf);
+	}
 
-    if (fgets(buf, sizeof(buf), fp) != NULL) {
-        printf("%s", buf);
-    }
+	int s = tok_sum(buf);
+	printf("sum: %d\n", s);
 
-    char delims[] = ",";
-    char *token = strtok(buf, delims);
-
-    while (token != NULL) {
-        printf("%s\n", token);
-        int num = atoi(token);
-        sum = sum + num;
-        count = count + 1;
-        token = strtok(NULL, delims);
-    }
-
-    fclose(fp);
-
-    printf("Count: %d , Sum: %d\n", count, sum);
-
-    return 0;
+	fclose(fp);
+	return 0;
 }
 
+int tok_sum(char *buf)
+{
+	char delims[] = " ,";
+	char *token = strtok(buf,delims);
+	int sum = 0;
+	while (token != NULL)
+	{
+		int num = atoi(token);
+		sum = sum + num;
+
+		token = strtok(NULL, delims);
+	}
+	return sum;
+}
