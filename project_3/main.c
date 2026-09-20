@@ -2,13 +2,20 @@
 #include<stdio.h>
 
 int main(int argc, char *argv[])
-{
-	int x = 5;
-	int y = 3;
+{	
+	int arr[16] = { 2, 3, 4, 5, 3, 6, 8, 6, 54, 4, 3, 2, 9, 8, 76, 0};
 
-	printf("%d,%d\n", x, y);
-	
-	swap(&x,&y);
+	for (int j = 0; j < 15; ++j)
+	{
+		int i = min_idx(arr, j, 16 - j);
+		swap(&arr[j], &arr[i]);
+	}
 
-	printf("%d,%d\n", x, y);
+	for(int j = 0; j < 16; ++j)
+	{
+		printf("%d ", arr[j]);
+	}
+	printf("\n");
+
+	return 0;
 }
