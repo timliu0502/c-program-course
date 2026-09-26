@@ -7,6 +7,17 @@ void swap(int *x, int *y)
 	*y = t;
 }
 
+
+void bubble_sort(int *arr, int len)
+{
+	for(int i = 0; i < len - 1; ++i)
+	{
+		int idx = min_idx(arr, i, len-i);
+		swap(&arr[i], &arr[idx]);
+
+	}
+}
+
 int min_idx(int *arr, int start, int len)
 {
 	int min_num = arr[start];
