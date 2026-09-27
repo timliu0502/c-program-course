@@ -3,4 +3,7 @@
 
 void print_array (int *a, int len);
 
+
+int buf2array (char *buf, int *arr);
+
 #endif

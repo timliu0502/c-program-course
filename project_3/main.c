@@ -1,14 +1,37 @@
+#include<stdio.h>
 #include"my_sorting.h"
 #include"my_array.h"
-#include<stdio.h>
 
-int main(int argc, char *argv[])
-{	
-	int arr[16] = { 2, 3, 4, 5, 3, 6, 8, 6, 54, 4, 3, 2, 9, 8, 76, 0};
+int main(int argc, char*argv[])
+{
+        if (argc != 2)
+        {
+                printf("no init file detected!\n");
+                return 1;
+        }
 
-	bubble_sort(arr, 16);
+        char * filename = argv[1];
+        FILE * fp = fopen(filename, "r");
 
-	print_array(arr, 16);
+        if(fp == NULL)
+        {
+                printf("open %s failed.\n", filename);
+                return 2;
+        }
 
-	return 0;
+        char buf [1000];
+	int arr [1000];
+
+        while (fgets(buf,sizeof(buf),fp) != NULL)
+        {
+                int len = buf2array(buf,arr);
+		bubble_sort(arr, len);
+	        print_array(arr, len);
+        }
+        fclose(fp);
+
+
+        return 0;
 }
+
+
