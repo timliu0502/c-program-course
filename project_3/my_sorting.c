@@ -33,5 +33,24 @@ int min_idx(int *arr, int start, int len)
 	return idx;
 }
 
+void sweep(int *arr, int len)
+{
+	for(int i = 0; i < len - 1; ++i)
+	{
+		if (arr[i] > arr[i + 1])
+		{
+			swap(&arr[i], &arr[i + 1]);
+		}
+	}
 
-		
+}
+
+void exchange_sort (int *arr, int len)
+{
+	for (int i = 0; i < len - 1; ++i)
+	{
+		sweep(arr, len - i);
+	}
+}
+
+
